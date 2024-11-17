@@ -1,6 +1,7 @@
 package ru.itmentor.spring.boot_security.demo.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itmentor.spring.boot_security.demo.dao.UserDao;
 import ru.itmentor.spring.boot_security.demo.model.User;
@@ -12,13 +13,20 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Кодируем пароль здесь
+        userDao.save(user);
         userDao.save(user);
     }
 
     @Override
     public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Кодируем пароль здесь
+        userDao.update(user);
         userDao.update(user);
     }
 

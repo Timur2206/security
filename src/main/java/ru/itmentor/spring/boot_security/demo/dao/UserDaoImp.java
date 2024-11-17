@@ -13,21 +13,16 @@ import java.util.List;
 @Repository
 @Transactional
 public class UserDaoImp implements UserDao {
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     public void save(User user) {
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
         entityManager.persist(user);
     }
 
     @Override
     public void update(User user) {
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
         entityManager.merge(user);
     }
 

@@ -1,5 +1,6 @@
 package ru.itmentor.spring.boot_security.demo.Service;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.itmentor.spring.boot_security.demo.model.User;
 
 @Service
+@Lazy
 public class CustomUserService implements UserDetailsService {
 
     private UserService userService;
